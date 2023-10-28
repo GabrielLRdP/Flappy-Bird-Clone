@@ -1,5 +1,7 @@
 //config
 
+
+let testgit = 0;
 let canvas = document.querySelector("canvas");
 canvas.height = 640;
 canvas.width = 360;
