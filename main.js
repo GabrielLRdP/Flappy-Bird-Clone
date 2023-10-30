@@ -1,7 +1,5 @@
 //config
 
-
-let testgit = 0;
 let canvas = document.querySelector("canvas");
 canvas.height = 640;
 canvas.width = 360;
@@ -17,6 +15,8 @@ let pipeHeight = 640;
 let holeSize = 150; // configuration de la taille de l'espace entre les tuyaux
 
 let pipeArray = []; // initialisation de la liste des tuyaux
+
+let closePipe = Object;
 
 let timer = 0; // initialisation du timer quiva définir le raprochement entre différents tuyaux 
 
@@ -56,7 +56,7 @@ function Bird (){
 
     this.draw = function() {
         c.save();
-        c.translate(this.x-birdWidth/2,this.y+birdHeight/2);
+        c.translate(this.x,this.y);
         c.rotate(this.dy*rotation*Math.PI/180);
         c.drawImage(birdImage,birdWidth/-2,birdHeight/-2,birdWidth,birdHeight); 
         //c.fillRect (birdWidth/-2,birdHeight/-2,birdWidth,birdHeight);
@@ -72,11 +72,11 @@ function Bird (){
 
 function Pipes (random){
 
-    this.x = canvas.width + pipeWidth;
-    this.y = random;
+    this.x = canvas.width;
+    this.y = canvas.height*random ;
     this.draw = function (){
-        c.drawImage(topPipe    ,this.x - pipeWidth/2 , -pipeHeight*random - holeSize/2     , pipeWidth , pipeHeight);
-        c.drawImage(bottomPipe ,this.x - pipeWidth/2 , pipeHeight*(1-random) + holeSize/2  , pipeWidth , pipeHeight);
+        c.drawImage(topPipe    ,this.x,  this.y - pipeHeight - holeSize/2 , pipeWidth , pipeHeight);
+        c.drawImage(bottomPipe ,this.x,  this.y              + holeSize/2 , pipeWidth , pipeHeight);
     }
 
     this.update = function (){
@@ -89,16 +89,46 @@ function Pipes (random){
 
 // Fonctions 
 
-function colision (){
+function closestPipe (){
     for (let i = 0 ; i < pipeArray.length; i++){
-        
-        if (bird.x > pipeArray[i].x - pipeWidth/2 && bird.x < pipeArray[i].x + pipeWidth/2 && (bird.y - birdHeight/1.5> pipeHeight*(1-pipeArray[i].y) || bird.y + birdHeight/1.5 < pipeHeight*(1-pipeArray[i].y)-holeSize)){
-            gameOver = true;
-            
-        }
+        if (pipeArray[i].x + pipeWidth > bird.x-birdWidth/2){
+            closePipe = pipeArray[i]
+            break
+        };
     }
+    
+    return closePipe
 
 }
+
+function colision (){
+    
+        
+
+        let crossWidth = false;
+        let crossHeight = false;
+        
+        if (bird.x+birdWidth/2 > closePipe.x) {
+            crossWidth = true;
+        }
+
+        if (bird.y - birdHeight/2 < closePipe.y - holeSize/2 || bird.y + birdHeight/2 > closePipe.y + holeSize/2 ) {
+            crossHeight = true;
+        }
+
+        console.log(crossWidth);
+        console.log(crossHeight);
+        //&& 
+        //bird.x < pipeArray[i].x + pipeWidth/2 &&  (
+        //bird.y - birdHeight/1.5> pipeHeight*(1-pipeArray[i].y) 
+        //|| 
+        //bird.y + birdHeight/1.5 < pipeHeight*(1-pipeArray[i].y)-holeSize )){
+        if (crossWidth && crossHeight) {gameOver = true;}
+
+    }
+    
+
+
 
 function drawGameOver (){
     if (gameOver){
@@ -142,6 +172,7 @@ function animate() {
     c.beginPath();
     c.drawImage(background,0,0);
 
+    closePipe = closestPipe();
     colision();
     bird.update();
     for (let i = 0; i < pipeArray.length; i++) {
@@ -158,7 +189,8 @@ function animate() {
         pipeArray.shift();
     }
     console.log(bird);
-    console.log(pipeArray[0]);
+    console.log(closePipe);
+    
     drawGameOver();
     drawScore();
     
