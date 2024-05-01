@@ -6,7 +6,6 @@ Appuyez sur la touche **Espace** pour faire voler l'oiseau et éviter les tuyaux
 
 ## Technologies Utilisées
 
-- **Framework:** [Indiquez le framework utilisé, par exemple Phaser.js]
 - **Langages:** HTML, CSS, JavaScript
 
 ## Jouer
