@@ -6,7 +6,7 @@ Appuyez sur la touche **Espace** pour faire voler l'oiseau et éviter les tuyaux
 
 ## Capture d'écran 
 
-![Capture](https://github.com/GabrielLRdP/Flappy-Bird-Clone/assets/149192169/7636415a-2001-4947-94d9-52d121b1a749)
+![Capture](https://github.com/GabrielLRdP/Flappy-Bird-Clone/assets/149192169/42a7850e-fff0-42ee-9a5f-0e0bb0e0a6ad)
 
 
 ## Technologies Utilisées
