@@ -4,6 +4,11 @@
 
 Appuyez sur la touche **Espace** pour faire voler l'oiseau et éviter les tuyaux. Évitez de toucher les tuyaux ou le sol pour continuer à voler et à marquer des points.
 
+## Capture d'écran 
+
+![Capture](https://github.com/GabrielLRdP/Flappy-Bird-Clone/assets/149192169/7636415a-2001-4947-94d9-52d121b1a749)
+
+
 ## Technologies Utilisées
 
 - **Langages:** HTML, CSS, JavaScript
